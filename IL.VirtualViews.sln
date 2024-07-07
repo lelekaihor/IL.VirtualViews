@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Il.VirtualViews", "Il.VirtualViews\Il.VirtualViews.csproj", "{578373E6-72C6-42BE-AF94-387F10161D4A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Il.VirtualViews", "Code\Il.VirtualViews.csproj", "{578373E6-72C6-42BE-AF94-387F10161D4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
