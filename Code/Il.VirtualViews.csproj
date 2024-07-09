@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageVersion>1.0.0</PackageVersion>
-        <RootNamespace>Il.VirtualViews</RootNamespace>
+        <RootNamespace>IL.VirtualViews</RootNamespace>
         <Title>Virtual Views</Title>
         <Authors>Ihor Leleka</Authors>
         <Description>Class based virtual views.</Description>
