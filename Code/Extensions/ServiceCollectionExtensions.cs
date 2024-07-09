@@ -1,4 +1,4 @@
-﻿using Il.ClassViewRendering.ContentProvider;
+﻿using Il.VirtualViews.ContentProvider;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.DependencyInjection;
 

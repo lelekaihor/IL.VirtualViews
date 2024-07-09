@@ -1,16 +1,22 @@
-﻿using System.Collections.Frozen;
+﻿#if NET8_0_OR_GREATER
+using System.Collections.Frozen;
+#endif
 using System.Reflection;
 using Il.ClassViewRendering.Attributes;
-using Il.ClassViewRendering.Helpers;
 using Il.ClassViewRendering.Interfaces;
+using IL.Misc.Helpers;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace Il.ClassViewRendering.ContentProvider;
+namespace Il.VirtualViews.ContentProvider;
 
 public sealed class VirtualViewsProvider : IFileProvider
 {
+#if NET8_0_OR_GREATER
     private FrozenDictionary<string, string> SupportedTypes { get; }
+#else
+    private Dictionary<string, string> SupportedTypes { get; }
+#endif
 
     public VirtualViewsProvider()
     {
@@ -19,7 +25,12 @@ public sealed class VirtualViewsProvider : IFileProvider
             .Where(assembly => !assembly.IsDynamic)
             .SelectMany(TypesAndAssembliesHelper.GetExportedTypes)
             .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false } && type.GetCustomAttribute<VirtualViewPathAttribute>() != default)
+
+#if NET8_0_OR_GREATER
             .ToFrozenDictionary(
+#else
+            .ToDictionary(
+#endif
                 keySelector => keySelector.GetCustomAttribute<VirtualViewPathAttribute>()!.Path,
                 valueSelector =>
                 {
@@ -52,17 +63,30 @@ public sealed class VirtualViewsProvider : IFileProvider
     }
 }
 
-public sealed class InMemoryFileInfo(string path, string content) : IFileInfo
+public sealed class InMemoryFileInfo : IFileInfo
 {
-    public string Name { get; } = Path.GetFileName(path);
+    private readonly string _content;
+
+    public InMemoryFileInfo(string path, string content)
+    {
+        _content = content;
+        Name = Path.GetFileName(path);
+    }
+
+    public string Name { get; }
+
     public bool Exists => true;
-    public long Length => content.Length;
+
+    public long Length => _content.Length;
+
     public DateTimeOffset LastModified { get; } = DateTimeOffset.UtcNow;
+
     public string PhysicalPath => null!;
+
     public bool IsDirectory => false;
 
     public Stream CreateReadStream()
     {
-        return new MemoryStream(System.Text.Encoding.UTF8.GetBytes(content));
+        return new MemoryStream(System.Text.Encoding.UTF8.GetBytes(_content));
     }
 }

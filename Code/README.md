@@ -1,4 +1,3 @@
-[![NuGet version (IL.VirtualViews)](https://img.shields.io/nuget/v/IL.VirtualViews.svg?style=flat-square)](https://www.nuget.org/packages/IL.VirtualViews/)
 # IL.VirtualViews
 Library which allows virtually register *.cshtml file as .cs classes with special attributes.
 
