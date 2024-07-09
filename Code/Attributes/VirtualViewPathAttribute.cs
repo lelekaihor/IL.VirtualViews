@@ -1,4 +1,4 @@
-﻿namespace Il.ClassViewRendering.Attributes;
+﻿namespace IL.VirtualViews.Attributes;
 
 /// <summary>
 /// Registers view virtually following specified path.

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace Il.ClassViewRendering.Extensions;
+namespace IL.VirtualViews.Extensions;
 
 public static class WebAppBuilderExtensions
 {

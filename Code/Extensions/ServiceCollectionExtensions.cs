@@ -1,8 +1,8 @@
-﻿using Il.VirtualViews.ContentProvider;
+﻿using IL.VirtualViews.ContentProvider;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Il.ClassViewRendering.Extensions;
+namespace IL.VirtualViews.Extensions;
 
 public static class ServiceCollectionExtensions
 {

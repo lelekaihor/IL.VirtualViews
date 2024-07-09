@@ -2,13 +2,13 @@
 using System.Collections.Frozen;
 #endif
 using System.Reflection;
-using Il.ClassViewRendering.Attributes;
-using Il.ClassViewRendering.Interfaces;
 using IL.Misc.Helpers;
+using IL.VirtualViews.Attributes;
+using IL.VirtualViews.Interfaces;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 
-namespace Il.VirtualViews.ContentProvider;
+namespace IL.VirtualViews.ContentProvider;
 
 public sealed class VirtualViewsProvider : IFileProvider
 {

@@ -1,4 +1,4 @@
-﻿namespace Il.ClassViewRendering.Interfaces;
+﻿namespace IL.VirtualViews.Interfaces;
 
 public interface IVirtualView
 {
