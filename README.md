@@ -14,7 +14,7 @@ Library which allows virtually register *.cshtml file as .cs classes with specia
 [VirtualViewPath("/Views/Test.cshtml")]
 class Sample : IVirtualView
 {
-    public string Content {get;} =
+    public string ViewContent =>
     """
     @model string
 
