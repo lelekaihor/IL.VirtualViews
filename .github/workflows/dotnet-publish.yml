@@ -8,6 +8,9 @@ on:
     tags:
       - '*'
 
+env:
+  PROJECT_PATH: ./Code/IL.VirtualViews/IL.VirtualViews.csproj
+
 jobs:
   build:
 
@@ -25,11 +28,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore $PROJECT_PATH
     - name: Build
-      run: dotnet build --no-restore --configuration Release /p:Version=$VERSION
+      run: dotnet build --no-restore --configuration Release /p:Version=$VERSION $PROJECT_PATH
     - name: Pack NuGet package
-      run: dotnet pack --configuration Release --output ./nupkg /p:PackageVersion=$VERSION
+      run: dotnet pack --configuration Release --output ./nupkg /p:PackageVersion=$VERSION $PROJECT_PATH
       if: success() && github.ref_type == 'tag'      
     - name: Publish NuGet package to GitHub Packages
       run: dotnet nuget push ./nupkg/*.nupkg --source https://nuget.pkg.github.com/lelekaihor/index.json --api-key ${{ secrets.GITHUB_TOKEN }}
