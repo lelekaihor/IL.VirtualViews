@@ -35,7 +35,7 @@ public sealed class VirtualViewsProvider : IFileProvider
                 valueSelector =>
                 {
                     var instance = Activator.CreateInstance(valueSelector) as IVirtualView;
-                    return instance!.ViewContent;
+                    return instance!.ViewContent();
                 }
             );
     }
