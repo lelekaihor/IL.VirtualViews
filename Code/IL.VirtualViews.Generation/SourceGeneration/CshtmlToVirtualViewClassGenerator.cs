@@ -69,7 +69,10 @@ public sealed class CshtmlToVirtualViewClassGenerator : IIncrementalGenerator
             sb.AppendLine($"{{");
             sb.AppendLine($"\tpublic string ViewContent()");
             sb.AppendLine($"\t{{");
-            sb.AppendLine($"\t\treturn @\"{generationClass.CshtmlContent}\";");
+            sb.AppendLine("\t\treturn");
+            sb.AppendLine("\"\"\"");
+            sb.AppendLine(generationClass.CshtmlContent);
+            sb.AppendLine("\"\"\";");
             sb.AppendLine($"\t}}");
             sb.AppendLine($"}}");
             spc.AddSource($"{generationClass.Name}.g.cs", sb.ToString());

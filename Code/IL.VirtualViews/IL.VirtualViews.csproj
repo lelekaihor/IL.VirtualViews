@@ -3,7 +3,7 @@
         <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageVersion>1.2.0</PackageVersion>
+        <PackageVersion>1.2.1</PackageVersion>
         <RootNamespace>IL.VirtualViews</RootNamespace>
         <Title>Virtual Views</Title>
         <Authors>Ihor Leleka</Authors>
@@ -36,6 +36,9 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\IL.VirtualViews.Generation\IL.VirtualViews.Generation.csproj" />
+      <ProjectReference Include="..\IL.VirtualViews.Generation\IL.VirtualViews.Generation.csproj">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </ProjectReference>
     </ItemGroup>
 </Project>
