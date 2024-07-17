@@ -13,7 +13,7 @@ Library which allows virtually register *.cshtml file as .cs classes with specia
 [VirtualViewPath("/Views/Test.cshtml")]
 class Sample : IVirtualView
 {
-    public string ViewContent =>
+    public string ViewContent() =>
     """
     @model string
 
@@ -51,11 +51,12 @@ public partial class Test : IVirtualView
 {
     public string ViewContent()
     {
-        return@"
+        return
+"""
 @model string
 
 @Html.Raw(Model)
-";
+""";
     } 
 }
 ```
