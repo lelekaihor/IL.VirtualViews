@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageVersion>1.2.1</PackageVersion>
+        <PackageVersion>1.3.0</PackageVersion>
         <RootNamespace>IL.VirtualViews</RootNamespace>
         <Title>Virtual Views</Title>
         <Authors>Ihor Leleka</Authors>
@@ -21,7 +21,7 @@
         <PackageReference Include="IL.Misc" Version="1.1.1" />
         <None Include="LICENSE.txt" Pack="true" Visible="false" PackagePath="" />
         <None Include="Readme.md" Pack="true" Visible="false" PackagePath="" />
-        <None Include="$(OutputPath)\net6.0\$(AssemblyName).Generation.dll"
+        <None Include="$(OutputPath)\net7.0\$(AssemblyName).Generation.dll"
               Pack="true"
               PackagePath="analyzers/dotnet/cs"
               Visible="false" />
