@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -41,7 +42,7 @@ public sealed class CshtmlToVirtualViewClassGenerator : IIncrementalGenerator
                 .Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList();
-            var startIndex = pathSplit.IndexOf(pathSplit.FirstOrDefault(x => combined.assemblyName.StartsWith(x)));
+            var startIndex = pathSplit.IndexOf(pathSplit.LastOrDefault(x => combined.assemblyName.StartsWith(x, StringComparison.InvariantCultureIgnoreCase)));
             var namespaceToUse = startIndex != -1 ? string.Join(".", pathSplit.Skip(startIndex)) : combined.assemblyName;
 
             spc.AddSource($"{generationClass.Name}.g.cs", BuildClassBody(generationClass, namespaceToUse));

@@ -1,6 +1,7 @@
 ﻿#if NET8_0_OR_GREATER
 using System.Collections.Frozen;
 #endif
+using System.Collections.Immutable;
 using System.Reflection;
 using IL.Misc.Helpers;
 using IL.VirtualViews.Attributes;
@@ -15,7 +16,7 @@ public sealed class VirtualViewsProvider : IFileProvider
 #if NET8_0_OR_GREATER
     private FrozenDictionary<string, string> SupportedTypes { get; }
 #else
-    private Dictionary<string, string> SupportedTypes { get; }
+    private ImmutableDictionary<string, string> SupportedTypes { get; }
 #endif
 
     public VirtualViewsProvider()
@@ -24,12 +25,14 @@ public sealed class VirtualViewsProvider : IFileProvider
             .GetAssemblies("*")
             .Where(assembly => !assembly.IsDynamic)
             .SelectMany(TypesAndAssembliesHelper.GetExportedTypes)
-            .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false } && type.GetCustomAttribute<VirtualViewPathAttribute>() != default)
+            .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false } 
+                           && type.IsAssignableFrom(typeof(IVirtualView))
+                           && type.GetCustomAttribute<VirtualViewPathAttribute>() != default)
 
 #if NET8_0_OR_GREATER
             .ToFrozenDictionary(
 #else
-            .ToDictionary(
+            .ToImmutableDictionary(
 #endif
                 keySelector => keySelector.GetCustomAttribute<VirtualViewPathAttribute>()!.Path,
                 valueSelector =>
