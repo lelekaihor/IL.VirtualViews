@@ -1,3 +1,4 @@
+using IL.VirtualViews.Attributes;
 using IL.VirtualViews.ContentProvider;
 using IL.VirtualViews.Extensions;
 using Microsoft.AspNetCore.Hosting;
@@ -29,11 +30,11 @@ public class RegistrationTests
         var virtualViewsProvider = fileProviders.OfType<VirtualViewsProvider>().FirstOrDefault();
         Assert.NotNull(virtualViewsProvider);
         
-        Assert.NotNull(virtualViewsProvider.GetFileInfo("/test/test.cshtml"));
+        Assert.NotNull(virtualViewsProvider.GetFileInfo("/views/test.cshtml"));
     }
     
     // Simple mock implementation of IWebHostEnvironment
-    internal class MockWebHostEnvironment : IWebHostEnvironment
+    private class MockWebHostEnvironment : IWebHostEnvironment
     {
         public string EnvironmentName { get; set; } = "Development";
         public string ApplicationName { get; set; } = "IL.VirtualViews.Tests";

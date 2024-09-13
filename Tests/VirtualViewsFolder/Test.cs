@@ -2,7 +2,14 @@ using IL.VirtualViews.Attributes;
 
 namespace IL.VirtualViews.Tests.VirtualViewsFolder;
 
-[VirtualViewPath("/test/test.cshtml")]
+public class TestAttribute : VirtualViewPathAttribute
+{
+    public TestAttribute(string componentName) : base($"/views/{componentName}.cshtml")
+    {
+    }
+}
+
+[Test("test")]
 public partial class Test
 {
 }

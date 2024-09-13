@@ -26,7 +26,7 @@ public sealed class VirtualViewsProvider : IFileProvider
             .Where(assembly => !assembly.IsDynamic)
             .SelectMany(TypesAndAssembliesHelper.GetExportedTypes)
             .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false }
-                           && type.GetCustomAttribute<VirtualViewPathAttribute>() != default
+                           && HasVirtualViewsAttributeOrOneOfDescendants(type)
                            && HasIVirtualViewInterfaceMethod(type))
 
 #if NET8_0_OR_GREATER
@@ -41,6 +41,13 @@ public sealed class VirtualViewsProvider : IFileProvider
                     return instance!.ViewContent();
                 }
             );
+    }
+
+    private static bool HasVirtualViewsAttributeOrOneOfDescendants(Type type)
+    {
+        return type
+            .GetCustomAttributes()
+            .Any(x => x.TypeId is VirtualViewPathAttribute);
     }
 
     private static bool HasIVirtualViewInterfaceMethod(Type type)
