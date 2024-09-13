@@ -25,9 +25,9 @@ public sealed class VirtualViewsProvider : IFileProvider
             .GetAssemblies("*")
             .Where(assembly => !assembly.IsDynamic)
             .SelectMany(TypesAndAssembliesHelper.GetExportedTypes)
-            .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false } 
-                           && type.IsAssignableFrom(typeof(IVirtualView))
-                           && type.GetCustomAttribute<VirtualViewPathAttribute>() != default)
+            .Where(type => type is { IsAbstract: false, IsGenericTypeDefinition: false }
+                           && type.GetCustomAttribute<VirtualViewPathAttribute>() != default
+                           && HasIVirtualViewInterfaceMethod(type))
 
 #if NET8_0_OR_GREATER
             .ToFrozenDictionary(
@@ -41,6 +41,11 @@ public sealed class VirtualViewsProvider : IFileProvider
                     return instance!.ViewContent();
                 }
             );
+    }
+
+    private static bool HasIVirtualViewInterfaceMethod(Type type)
+    {
+        return type.GetMethods().Any(x => x.Name == nameof(IVirtualView.ViewContent));
     }
 
     public IDirectoryContents GetDirectoryContents(string subpath)
