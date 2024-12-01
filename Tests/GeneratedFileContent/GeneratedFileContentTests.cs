@@ -13,7 +13,7 @@ public class GeneratedFileContentTests
 
                                 <p>Test 123</p>
                                 """;
-        var result = new Test().ViewContent();
+        var result = Test.ViewContent;
         
         Assert.Equal(expected, result);
     }

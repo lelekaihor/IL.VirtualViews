@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net7.0;net8.0</TargetFrameworks>
+        <TargetFrameworks>net7.0;net8.0;net9.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <PackageVersion>1.4.0</PackageVersion>
+        <PackageVersion>1.6.0</PackageVersion>
         <RootNamespace>IL.VirtualViews</RootNamespace>
         <Title>Virtual Views</Title>
         <Authors>Ihor Leleka</Authors>
@@ -18,7 +18,7 @@
     </PropertyGroup>
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="IL.Misc" Version="1.1.1" />
+        <PackageReference Include="IL.Misc" Version="1.2.0" />
         <None Include="LICENSE.txt" Pack="true" Visible="false" PackagePath="" />
         <None Include="Readme.md" Pack="true" Visible="false" PackagePath="" />
         <None Include="$(OutputPath)\net7.0\$(AssemblyName).Generation.dll"
@@ -26,14 +26,14 @@
               PackagePath="analyzers/dotnet/cs"
               Visible="false" />
     </ItemGroup>
-    <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.32" />
-    </ItemGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.20" />
     </ItemGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.0" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\IL.VirtualViews.Generation\IL.VirtualViews.Generation.csproj">

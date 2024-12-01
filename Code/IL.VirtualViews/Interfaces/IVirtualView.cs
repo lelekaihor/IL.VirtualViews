@@ -2,7 +2,7 @@
 {
     public interface IVirtualView
     {
-        string ViewContent();
+        public static abstract string ViewContent { get; }
     }
 }
 

@@ -30,8 +30,15 @@ public sealed class VirtualViewsProvider : IFileProvider
                 keySelector => (keySelector.GetCustomAttributes().First(x => x is VirtualViewPathAttribute) as VirtualViewPathAttribute)!.Path,
                 valueSelector =>
                 {
-                    var instance = Activator.CreateInstance(valueSelector) as IVirtualView;
-                    return instance!.ViewContent();
+                    var property = valueSelector
+                        .GetProperty(nameof(IVirtualView.ViewContent), BindingFlags.Public | BindingFlags.Static);
+
+                    if (property == null)
+                    {
+                        throw new InvalidOperationException($"Type {valueSelector.FullName} does not implement the static property {nameof(IVirtualView.ViewContent)}.");
+                    }
+
+                    return (string)property.GetValue(null)!;
                 }
             );
     }
